@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>그냥 연습해보기</title>
+    <style type="text/css">
+        #character {
+            position: absolute;
+            left: 0px;
+            top: 200px;
+            width: 200px;
+            height: 200px;
+            z-index: 1;
+        }
+
+        button {
+            width: 150px;
+            margin: 0 15px;
+            font: bold 25px/50px Arial, sans-serif;
+            color: rgb(0, 255, 106);
+            background-color: blueviolet(255,60,0);
+            text-align: center;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <button type="button" id="play">play</button>
+    <button type="button" id="stop">stop</button>
+
+    <img src="그림1.png" art="캐릭터" id="character">
+
+<script>
+    const PLAY = document.querySelector('#play');
+    const STOP = document.querySelector('#stop');
+    let position =0;
+    let animation;
+
+    function move(){
+        position+=1;
+        document.getElementById('character').style.left=position+"px";
+    }
+    function play(){
+        animation = setInterval(move,10)
+    }
+    function stop(){
+        clearInterval(animation);
+    }
+    PLAY.addEventListener('click',play);
+    STOP.addEventListener('click',stop);
+    </script>
+</body>
+</html>

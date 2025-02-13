@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>두더지잡기게임</title>
+    <style>
+        .game-container {
+            width: 800px;
+            height: 600px;
+            background-image: url('잔디.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .mole {
+            width: 150px;
+            height: 150px;
+            background-image: url('그림1.png');
+            background-size: contain;
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+        #score {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id = "score">점수:0</div>
+    <div class="game-container" id="game-container"></div>
+
+    <script>
+        const gameContainer = document.getElementById('game-container');
+        const scoreElement = document.getElementById('score');
+        let score = 0;
+
+        function createMole(){
+            const mole = document.createElement('div');
+            mole.classList.add('mole');
+            mole.style.left = `${Math.random()*(gameContainer.offsetWidth-100)}px`;
+            mole.style.top = `${Math.random()*(gameContainer.offsetHeight-100)}px`;
+
+            mole.addEventListener('click', () => {
+                score++;
+                scoreElement.textContent = `점수: ${score}`;
+                mole.remove();
+            });
+
+            gameContainer.appendChild(mole);
+
+            setTimeout(()=> {
+                if(mole.parentNode === gameContainer){
+                    mole.remove();
+                }
+            }, 1500);
+        }
+
+        setInterval(createMole, 1000);
+    </script>
+</body>
+</html>
